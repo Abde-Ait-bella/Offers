@@ -65,6 +65,7 @@ class OfferController extends Controller
                 'message' => 'Offer created successfully',
                 'data' => $offer
             ], 201);
+            
         }catch(\Exception $e){
             return response()->json([
                 'status' => false,
@@ -89,12 +90,8 @@ class OfferController extends Controller
      */
     public function update(UpdateOfferRequest $request, Offer $offer)
     {
-        if ($offer->user_id !== auth()->id()) {
-            return response()->json([
-                'status' => false,
-                'message' => 'Unauthorized action'
-            ], 403);
-        }
+
+        $this->authorize('update', $offer);
 
         $offer->update([
             'title' => $request->title ?? $offer->title,
@@ -120,12 +117,14 @@ class OfferController extends Controller
     public function destroy(Offer $offer)
     {
         // Check if user owns the offer
-        if ($offer->user_id !== auth()->id()) {
-            return response()->json([
-                'status' => false,
-                'message' => 'Unauthorized action'
-            ], 403);
-        }
+        // if ($offer->user_id !== auth()->id()) {
+        //     return response()->json([
+        //         'status' => false,
+        //         'message' => 'Unauthorized action'
+        //     ], 403);
+        // }
+
+        $this->authorize('destroy', $offer);
 
         $offer->delete();
 
