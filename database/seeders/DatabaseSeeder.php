@@ -3,7 +3,9 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Database\Factories\OfferFactory;
 use Illuminate\Database\Seeder;
+use UserFactory;
 
 class DatabaseSeeder extends Seeder
 {
@@ -12,12 +14,17 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // \App\Models\User::factory(10)->create();
-
-        \App\Models\User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'amine@gmail.com',
-            "password"=> "amine"
-        ]);
+        
+        $this->call(
+            RoleSeeder::class,
+            OfferSeeder::class
+        );
+        
+        \App\Models\User::factory(10)->create();
+        // \App\Models\User::factory()->create([
+        //     'name' => 'Test User',
+        //     'email' => 'amine@gmail.com',
+        //     "password"=> "amine"
+        // ]);
     }
 }

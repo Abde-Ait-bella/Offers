@@ -4,6 +4,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\OfferController;
+use App\Http\Controllers\PostulerController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -26,5 +28,8 @@ Route::middleware('auth:sanctum')->group(function(){
         return $request->user();
     });
     Route::apiResource('offers', OfferController::class);
+
+    Route::post('/postuler', [PostulerController::class, 'store']);
     
+    Route::get('/postuler', [PostulerController::class, 'index']);
 });

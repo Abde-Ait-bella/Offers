@@ -23,6 +23,6 @@ class Offer extends Model
         'job_type',
         'deadline',
         'is_active',
-        'user_id',
+        'recruteur_id',
     ];
 }
